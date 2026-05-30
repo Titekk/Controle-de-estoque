@@ -1,6 +1,5 @@
 #include <iomanip>
 #include <iostream>
-#include <stack>
 #include <fstream>
 #include <stdlib.h>
 #include <string>
@@ -14,9 +13,9 @@ string lsnit[100];
 int lsqit[100];
 
 int main() {
-    int zeg;
+    char zeg;
 
-    string txt = "Controle de teste";
+    string txt = "Controle de Estoque";
 
     string item;
 
@@ -34,7 +33,7 @@ int main() {
     }
 
 
-    for (int i = 0; i != 4;) {
+    for (int i = 0; i != '4'; i++) {
 
         printMenu();
 
@@ -46,19 +45,23 @@ int main() {
             continue;// volta pro início do loop
         }
 
-        if (zeg == 4) {
-            i = zeg;
+        if (zeg == '4') {
+            cout <<"Obrigado por usar o Controle de Estoques! Até a próxima.";
+            break;
         }
-        if (zeg >= 1 && zeg <= 4) {
+        if (zeg >= '1' && zeg <= '4') {
             switch (zeg) {
-                case 1:
+                case '1':
                     cout << "Digite o nome do item:";
                     cin >> nmditem;
                     cout << "Digite a quantidade de items:";
                     cin >> qntditem;
                     cout << "Item adicionado com sucesso!" << endl;
+
+                    lsnit[i] = nmditem;
+                    lsqit[i] = qntditem;
                     break;
-                case 2:
+                case '2':
                     removeItem();
                     break;
             }
@@ -66,17 +69,15 @@ int main() {
             cout <<"erro!" << endl;;
         }
 
-        lsnit[i] = nmditem;
-        lsqit[i] = qntditem;
         cout << "Deseja continuar o programa: s/n?" << endl;
 
 
 
         if (arquivo.is_open()) {
-            arquivo << lsnit[i];
-            arquivo << endl;
-            arquivo << lsqit[i];
-            arquivo << endl;
+                arquivo << lsnit[i];
+                arquivo << endl;
+                arquivo << lsqit[i];
+                arquivo << endl;
         } else {
             cout << "Erro na abertura do arquivo.";
         }
@@ -96,7 +97,7 @@ int main() {
 
 void printMenu() {
     cout << "==============================" << endl;
-    cout << setw(15) << "Controle " << "de teste" << endl;
+    cout << setw(15) << "Controle " << "de estoque" << endl;
     cout << "==============================" << endl;
 
     cout << "Selecione uma opção:\n"
@@ -110,27 +111,35 @@ void removeItem() {
     string name;
     int qnt;
     char option;
-    for (int i = 0; i != 4;) {
+
+    for (int i = 0; i != 'n'; i++) {
         cout << "Digite nome do item que você quer remover:" << endl;
         cin >> name;
-        cout <<"Digite a quantidade a ser removida:" << endl;
-        cin >> qnt;
+
+        int total = lsqit[i] - qnt;
+
         if (lsnit[i] == name) {
-            if (lsqit[i] - qnt == 0) {
+            cout <<"Digite a quantidade a ser removida:" << endl;
+            cin >> qnt;
+
+            int total = lsqit[i] - qnt;
+
+            if (total == 0) {
                 lsnit[i] = " ";
                 cout << "Item removido com sucesso!" << endl;
             }
-            if ((lsqit[i] - qnt) < 1) {
-                cout << "Estoque insuficiente. Quantidade disponivel: " <<lsnit[i] << endl;
+            if (total < 0) {
+                cout << "Estoque insuficiente. Quantidade disponivel: " << total << endl;
             }
-            lsqit[i] -= qnt;
+            lsnit[i] = name;
+            lsqit[i] = total;
             cout <<"Quantidade atualizada com sucesso!" << endl;
         }else
             cout <<"Item não encontrado." << endl;
         cout << "Quer remover mais algum item s/n?" << endl;
         cin >> option;
         if (option == 'n') {
-            break;
+            i = 'n';
         }
     }
 
