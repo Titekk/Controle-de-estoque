@@ -1,3 +1,9 @@
+/**
+ * @file main.cpp
+ * @brief Sistema de Controle de Estoque em C++
+ * @author Nilmar Delgado (Titekk)
+ */
+
 #include <iomanip>
 #include <iostream>
 #include <fstream>
@@ -5,23 +11,20 @@
 #include <string>
 #include <array>
 
-void printMenu();
-
-void removeItem();
-
-void printEstoque();
-
 using namespace std;
 
+// Protótipos das funções
+void printMenu();
+void removeItem();
+void printEstoque();
+
+// Estruturas globais de armazenamento em memória
 int count = 0;
-
-array<string, 100> lsnit;
-
-array<int, 100> lsqit;
+array<string, 100> lsnit;  ///< Lista de nomes dos itens
+array<int, 100> lsqit;     ///< Lista de quantidades dos itens
 
 int main() {
     char zeg;
-
     string txt = "Controle de Estoque";
 
     string item;
@@ -110,6 +113,9 @@ int main() {
     return 0;
 }
 
+/**
+ * @brief Exibe o menu principal de opções para o usuário
+ */
 void printMenu() {
     cout << "==============================" << endl;
     cout << setw(15) << "Controle " << "de estoque" << endl;
@@ -123,6 +129,9 @@ void printMenu() {
             "Opção:";
 }
 
+/**
+ * @brief Realiza a remoção ou redução da quantidade de um item do estoque
+ */
 void removeItem() {
     string name;
     int qntRemovida;
@@ -171,6 +180,10 @@ void removeItem() {
         }
     }
 }
+
+/**
+ * @brief Exibe a listagem de todos os itens cadastrados no estoque
+ */
 void printEstoque() {
     bool estoqueExists = false;
     cout <<"=============================\n"
