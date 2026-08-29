@@ -1,0 +1,42 @@
+# Compiladores e Executáveis
+*.exe
+*.out
+*.app
+*.o
+*.obj
+*.pdb
+*.ilk
+
+# Arquivos gerados durante a execução
+estoque.txt
+*.log
+
+# Diretórios de Build
+build/
+bin/
+obj/
+out/
+cmake-build-*/
+.cache/
+
+# CMake gerados
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# IDEs e Editores
+.vscode/
+.vs/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Sistema Operacional
+.DS_Store
+Thumbs.db
+Desktop.ini
